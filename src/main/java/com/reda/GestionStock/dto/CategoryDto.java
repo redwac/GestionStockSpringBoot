@@ -22,7 +22,7 @@ public class CategoryDto {
     @JsonIgnore
     private List<ArticleDto> articles ;
 
-    // Category to CategoryDto
+    // Category to CategoryDto   // select from data base
     public static CategoryDto fromEntity(Category category){
         if (category == null){
             return null;

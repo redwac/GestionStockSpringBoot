@@ -10,6 +10,7 @@ public class CommandeClientValidation {
 
     public static List<String> validate(CommandeClientDto commandeClientDto) {
         List<String> errors = new ArrayList<>();
+
         if (commandeClientDto == null) {
             errors.add("Veuillez renseigner le code de la commande");
             errors.add("Veuillez renseigner la date de la commande");

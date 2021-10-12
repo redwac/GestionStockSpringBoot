@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Data
-@Builder
+//@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 //permet ed creer un builder on utilsant le designe patern builder qui permet de construir un objet en exposant des methode qui contient le meme nom de l'attribue avec une methode qui vas construir un objet avec les meme champ des tables
@@ -29,11 +29,9 @@ public class AbstractEntity implements Serializable {
 
     @CreatedDate // on presiser pour Hibernate que c'est une date de creation
     @Column(name = "creationDate", nullable = false)
-    @JsonIgnore // j'ai pas besoin de ces attribue qu'on j'invoque mon API
     private Instant creationDate; // puisque on utilise java 11 on peut utiliser Instant a la place de Date
 
     @LastModifiedDate
     @Column(name = "lastModifiedDate", nullable = false)
-    @JsonIgnore
     private Instant lastModifiedDate;
 }

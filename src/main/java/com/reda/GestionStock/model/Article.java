@@ -32,11 +32,12 @@ public class Article extends AbstractEntity{
     @Column(name = "photo")
     private String photo;
 
+    @Column(name = "identreprise")
+    private Integer idEntreprise;
     //chaque article appartien a une categorie on cree l'attribue categorie pour lie table article et categorie aussi le mapping
     @ManyToOne
     @JoinColumn(name = "idcategory")
     private Category category;
 
-    @Column(name = "identreprise")
-    private Integer idEntreprise;
+
 }

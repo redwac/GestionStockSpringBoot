@@ -24,12 +24,13 @@ public class Category extends AbstractEntity{
     @Column(name = "designation")
     private String designation;
 
+    @Column(name = "identreprise")
+    private Integer idEntreprise;
     // parce que une categorie conient luesieur article on ajoute une liste d'article aussi le mapping qui est l'attribue category dans la class Article
     @OneToMany(mappedBy = "category")
     private List<Article> articles;
 
-    @Column(name = "identreprise")
-    private Integer idEntreprise;
+
 
 
 }

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @Builder
 @Data
-public class ArticleDto {
+public class ArticleDto extends Article {
 
     private Integer id;
 
@@ -37,6 +37,7 @@ public class ArticleDto {
 
     private CategoryDto category;
 
+
     private Integer idEntreprise;
 
     public static ArticleDto fromEntity(Article article){
@@ -52,7 +53,7 @@ public class ArticleDto {
                 .prixUniteTtc(article.getPrixUniteTtc())
                 .photo(article.getPhoto())
                 .idEntreprise(article.getIdEntreprise())
-                .category(CategoryDto.fromEntity(article.getCategory()))
+                //.category(CategoryDto.fromEntity(article.getCategory()))
                 .build();
     }
     public static Article toEntity(ArticleDto articleDto){
