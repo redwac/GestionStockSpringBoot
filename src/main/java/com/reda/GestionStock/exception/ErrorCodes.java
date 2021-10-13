@@ -15,7 +15,8 @@ public enum  ErrorCodes {
     LIGNE_VENTE_NOT_FOUND(10000),
     MVSTK_NOT_FOUND(11000),
     UTILISATEUR_NOT_FOUND(12000),
-    VENTES_NOT_FOUND(13000) ;
+    VENTES_NOT_FOUND(13000),
+    BAD_CREDENTIALS(1400);
 
 
     private int code ;

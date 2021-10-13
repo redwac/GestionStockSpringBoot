@@ -9,11 +9,16 @@ spring:
     database: MYSQL
     show-sql: false
 # Hibernate DDL Auto (create, create-drop, update)
-    hibernate:
+     hibernate:
       ddl-auto: update
+
+
     properties:
-      hibernate:
+      ejb:
+        interceptor: com.reda.GestionStock.interceptor.Interceptor
+    hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+
 server:
   port: 8080
 

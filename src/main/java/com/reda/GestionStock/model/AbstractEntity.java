@@ -28,7 +28,7 @@ public class AbstractEntity implements Serializable {
     private Integer id;
 
     @CreatedDate // on presiser pour Hibernate que c'est une date de creation
-    @Column(name = "creationDate", nullable = false)
+    @Column(name = "creationDate", nullable = false, updatable = false)
     private Instant creationDate; // puisque on utilise java 11 on peut utiliser Instant a la place de Date
 
     @LastModifiedDate

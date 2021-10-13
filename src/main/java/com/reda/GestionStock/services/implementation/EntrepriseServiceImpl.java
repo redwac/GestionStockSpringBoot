@@ -1,17 +1,22 @@
 package com.reda.GestionStock.services.implementation;
 
 import com.reda.GestionStock.dto.EntrepriseDto;
+import com.reda.GestionStock.dto.RoleDto;
+import com.reda.GestionStock.dto.UtilisateurDto;
 import com.reda.GestionStock.exception.EntityNotFoundException;
 import com.reda.GestionStock.exception.ErrorCodes;
 import com.reda.GestionStock.exception.InvalidEntityException;
 import com.reda.GestionStock.repository.EntrepriseRepository;
+import com.reda.GestionStock.repository.RoleRepository;
 import com.reda.GestionStock.services.EntrepriseService;
+import com.reda.GestionStock.services.UtilisateurService;
 import com.reda.GestionStock.validator.EntrepriseValidator;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,11 +25,15 @@ import java.util.stream.Collectors;
 public class EntrepriseServiceImpl implements EntrepriseService {
 
     private EntrepriseRepository entrepriseRepository;
+    private RoleRepository roleRepository;
+    private UtilisateurService utilisateurService;
 
 
     @Autowired
-    public EntrepriseServiceImpl(EntrepriseRepository entrepriseRepository) {
+    public EntrepriseServiceImpl(EntrepriseRepository entrepriseRepository, RoleRepository roleRepository, UtilisateurService utilisateurService) {
         this.entrepriseRepository = entrepriseRepository;
+        this.roleRepository = roleRepository;
+        this.utilisateurService = utilisateurService;
     }
 
     @Override
@@ -36,11 +45,41 @@ public class EntrepriseServiceImpl implements EntrepriseService {
                     "Entreprise is not Valid 2 !!",
                     ErrorCodes.ENTREPRISE_NOT_FOUND, errors );
         }
-        return EntrepriseDto.fromEntity(
-                entrepriseRepository.save(
-                        EntrepriseDto.toEntity(dto)
-                )
+
+        EntrepriseDto savedEntreprise = EntrepriseDto.fromEntity(
+                entrepriseRepository.save(EntrepriseDto.toEntity(dto))
         );
+
+        UtilisateurDto utilisateur = fromEntreprise(savedEntreprise);
+
+        UtilisateurDto savedUser = utilisateurService.save(utilisateur);
+
+        RoleDto rolesDto = RoleDto.builder()
+                .roleName("ADMIN")
+                .utilisateur(savedUser)
+                .build();
+
+        roleRepository.save(RoleDto.toEntity(rolesDto));
+
+        return  savedEntreprise;
+
+    }
+
+    private UtilisateurDto fromEntreprise(EntrepriseDto dto) {
+        return UtilisateurDto.builder()
+                .adress(dto.getAdress())
+                .nom(dto.getNom())
+                .prenom(dto.getCodeFiscal())
+                .email(dto.getEmail())
+                .motDePass(generateRandomPassword())
+                .entreprise(dto)
+                .dateNaissance(Instant.now())
+                .photo(dto.getPhoto())
+                .build();
+    }
+
+    private String generateRandomPassword() {
+        return "som3R@nd0mP@$$word";
     }
 
     @Override
@@ -70,5 +109,5 @@ public class EntrepriseServiceImpl implements EntrepriseService {
         }
         entrepriseRepository.deleteById(id);
 
-    }
+     }
 }
