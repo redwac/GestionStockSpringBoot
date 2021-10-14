@@ -8,19 +8,21 @@ spring:
   jpa:
     database: MYSQL
     show-sql: false
-# Hibernate DDL Auto (create, create-drop, update)
-     hibernate:
-      ddl-auto: update
-
-
     properties:
-      ejb:
-        interceptor: com.reda.GestionStock.interceptor.Interceptor
+      hibernate:
+        session_factory:
+         interceptor: com.reda.GestionStock.interceptor.Interceptor
+# Hibernate DDL Auto (create, create-drop, update)
     hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+
+
+
+
 
 server:
-  port: 8080
+  port: 8081
 
 flickr:
   apiKey: 266876ee04dcebcfa1b0a40a4376621e

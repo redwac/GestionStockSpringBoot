@@ -31,8 +31,9 @@ public class ArticleController implements ArticleApi {
 
     @Override
     public Article findByID(Integer id) {
-        return articleService.findByID(id);
+        return null;
     }
+
 
     @Override
     public ArticleDto findByCodeArticle(String codeArticle) {

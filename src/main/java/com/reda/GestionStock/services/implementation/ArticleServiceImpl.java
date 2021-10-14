@@ -26,9 +26,7 @@ public class ArticleServiceImpl implements ArticleService {
     // injection du Repository d'article on fesant injection par constructeur
 
     @Autowired
-    public ArticleServiceImpl(
-            ArticleRepository articleRepository
-    ){
+    public ArticleServiceImpl(ArticleRepository articleRepository){
 
         this.articleRepository = articleRepository;
     }

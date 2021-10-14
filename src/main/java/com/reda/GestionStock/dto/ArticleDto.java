@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @Builder
 @Data
-public class ArticleDto extends Article {
+public class ArticleDto {
 
     private Integer id;
 

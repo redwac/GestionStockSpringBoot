@@ -9,7 +9,7 @@ public interface ArticleService {
 
     ArticleDto save(ArticleDto dto); // les DTOsont les intermediaire entre les notre api les l'exterieur
 
-    Article findByID(Integer id);
+    ArticleDto findByID(Integer id);
 
     ArticleDto findByCodeArticle(String codeArticle);
 
